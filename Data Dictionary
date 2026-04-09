@@ -1,0 +1,198 @@
+## Content 
+The dataset captures detailed records of banking transactions, including monetary amounts, timestamps, merchant information, customer location, device identifiers, and behavioral activity metrics such as transaction frequency and spending patterns. Each row represents a single financial transaction enriched with contextual and customer‑level features that help characterize normal versus anomalous behavior. The dataset also includes a binary fraud label, enabling supervised machine‑learning models to distinguish legitimate transactions from fraudulent ones.
+## Column Description
+Transaction_ID: Unique identifier assigned to each financial transaction.
+Customer_ID: Unique identifier representing the customer performing the transaction.
+Transaction_Amount (in Million): The amount of money involved in the transaction, recorded in millions.
+Transaction_Time: The time at which the transaction occurred.
+Transaction_Date: The date when the transaction was processed.
+Transaction_Type: Type of transaction such as POS, Online, or ATM.
+Merchant_ID: Unique identifier for the merchant or service provider.
+Merchant_Category: Category of the merchant such as grocery, electronics, fuel, etc.
+Transaction_Location: Geographic location where the transaction took place.
+Customer_Home_Location: The registered home location of the customer.
+Distance_From_Home: Approximate distance between the transaction location and the customer's home location.
+Device_ID: Unique identifier of the device used to perform the transaction.
+IP_Address: Network IP address associated with the transaction.
+Card_Type: Type of bank card used in the transaction (Debit or Credit).
+Account_Balance (in Million): Customer's account balance at the time of the transaction, recorded in millions.
+Daily_Transaction_Count: Total number of transactions performed by the customer on that day.
+Weekly_Transaction_Count: Total number of transactions performed by the customer during the week.
+Avg_Transaction_Amount (in Million): Average transaction amount of the customer based on previous transactions.
+Max_Transaction_Last_24h (in Million): Maximum transaction amount made by the customer in the last 24 hours.
+Is_International_Transaction: Indicates whether the transaction was international (Yes/No).
+Is_New_Merchant: Indicates whether the merchant is new for the customer (Yes/No).
+Failed_Transaction_Count: Number of failed transaction attempts before the successful transaction.
+Unusual_Time_Transaction: Indicates whether the transaction occurred at an unusual time (Yes/No).
+Previous_Fraud_Count: Number of previous fraudulent transactions associated with the customer.
+Fraud_Label: Target variable indicating whether the transaction is fraudulent or normal.
+## Data Dictionary
+Each field includes: ML Type (numeric, categorical, boolean, datetime, text); Model Role (feature, target, identifier, high‑risk leakage; Recommended Transformations; Feature Engineering Ideas; Fraud‑Relevance Notes
+1. Transaction_ID
+- ML Type: Identifier
+- Model Role: Exclude
+- Notes: No predictive value; drop from model.
+2. Customer_ID
+- ML Type: Categorical (high cardinality)
+- Model Role: Feature (optional)
+- Transform: Target encoding or embeddings
+- Feature Ideas:
+- Customer tenure
+- Customer-level aggregated behavior
+- Fraud Relevance: Helps detect customers with repeated fraud patterns.
+3. Transaction_Amount (in Million)
+- ML Type: Numeric
+- Model Role: Feature
+- Transform: Log scaling
+- Feature Ideas:
+- Z‑score vs customer’s normal spending
+- Ratio to account balance
+- Fraud Relevance: Fraud often involves unusually large or unusually small amounts.
+4. Transaction_Time
+- ML Type: Datetime (time-of-day)
+- Model Role: Feature
+- Transform: Extract hour, part of day (morning/night)
+- Feature Ideas:
+- Time deviation from customer’s usual pattern
+- Fraud Relevance: Fraud spikes during late-night hours.
+5. Transaction_Date
+- ML Type: Datetime
+- Model Role: Feature
+- Transform: Extract day of week, holiday flag
+- Feature Ideas:
+- Weekend vs weekday behavior
+- Fraud Relevance: Fraud increases on weekends and holidays.
+6. Transaction_Type
+- ML Type: Categorical
+- Model Role: Feature
+- Transform: One-hot or target encoding
+- Feature Ideas:
+- Risk score per transaction type
+- Fraud Relevance: Certain types (e.g., international transfers) carry higher risk.
+7. Merchant_ID
+- ML Type: Categorical (high cardinality)
+- Model Role: Feature
+- Transform: Target encoding
+- Feature Ideas:
+- Merchant risk score
+- Merchant transaction frequency
+- Fraud Relevance: Fraudsters often reuse the same merchants.
+8. Merchant_Category
+- ML Type: Categorical
+- Model Role: Feature
+- Transform: One-hot or target encoding
+- Feature Ideas:
+- Category-level fraud rate
+- Fraud Relevance: Electronics, travel, and luxury categories are high-risk.
+9. Transaction_Location
+- ML Type: Categorical / Geolocation
+- Model Role: Feature
+- Transform: Encode region; compute distance
+- Feature Ideas:
+- Country risk index
+- Fraud Relevance: Fraud often occurs far from customer’s home.
+10. Customer_Home_Location
+- ML Type: Categorical
+- Model Role: Feature
+- Transform: Region encoding
+- Feature Ideas:
+- Home region risk score
+- Fraud Relevance: Used to compute distance anomalies.
+11. Distance_From_Home
+- ML Type: Numeric
+- Model Role: Feature
+- Transform: Normalize
+- Feature Ideas:
+- Distance z‑score vs customer’s typical radius
+- Fraud Relevance: Large distances are strong fraud indicators.
+12. Device_ID
+- ML Type: Categorical (high cardinality)
+- Model Role: Feature
+- Transform: Target encoding
+- Feature Ideas:
+- Device familiarity score
+- Fraud Relevance: Fraudsters often use new or unrecognized devices.
+13. IP_Address
+- ML Type: Categorical / Network feature
+- Model Role: Feature
+- Transform:
+- Extract country
+- Extract ASN (ISP)
+- Feature Ideas:
+- Proxy/VPN detection
+- Fraud Relevance: Fraud often uses foreign or anonymized IPs.
+14. Card_Type
+- ML Type: Categorical
+- Model Role: Feature
+- Transform: One-hot
+- Feature Ideas:
+- Card risk score
+- Fraud Relevance: Credit cards have higher fraud exposure.
+15. Account_Balance (in Million)
+- ML Type: Numeric
+- Model Role: Feature
+- Transform: Log scaling
+- Feature Ideas:
+- Ratio: Transaction_Amount / Account_Balance
+- Fraud Relevance: Fraud often drains accounts quickly.
+16. Daily_Transaction_Count
+- ML Type: Numeric
+- Model Role: Feature
+- Transform: Normalize
+- Feature Ideas:
+- Spike detection
+- Fraud Relevance: Sudden bursts of activity are suspicious.
+17. Weekly_Transaction_Count
+- ML Type: Numeric
+- Model Role: Feature
+- Transform: Normalize
+- Feature Ideas:
+- Weekly vs daily ratio
+- Fraud Relevance: Helps detect unusual weekly patterns.
+18. Avg_Transaction_Amount (in Million)
+- ML Type: Numeric
+- Model Role: Feature
+- Transform: Normalize
+- Feature Ideas:
+- Deviation from average
+- Fraud Relevance: Fraud often deviates from customer norms.
+19. Max_Transaction_Last_24h (in Million)
+- ML Type: Numeric
+- Model Role: Feature
+- Transform: Normalize
+- Feature Ideas:
+- Compare with current transaction
+- Fraud Relevance: Fraud often follows a large prior transaction.
+20. Is_International_Transaction
+- ML Type: Boolean
+- Model Role: Feature
+- Feature Ideas:
+- Combine with IP country mismatch
+- Fraud Relevance: One of the strongest fraud predictors.
+21. Is_New_Merchant
+- ML Type: Boolean
+- Model Role: Feature
+- Feature Ideas:
+- Merchant familiarity score
+- Fraud Relevance: Fraudsters often target new merchants.
+22. Failed_Transaction_Count
+- ML Type: Numeric
+- Model Role: Feature
+- Feature Ideas:
+- Recent failure spike
+- Fraud Relevance: Fraud attempts often fail multiple times before success.
+23. Unusual_Time_Transaction
+- ML Type: Boolean
+- Model Role: Feature
+- Feature Ideas:
+- Combine with hour-of-day
+- Fraud Relevance: Fraud spikes at unusual hours.
+24. Previous_Fraud_Count
+- ML Type: Numeric
+- Model Role: Feature
+- Leakage Risk: Low (historical)
+- Fraud Relevance: Strong predictor; repeat offenders.
+25. Fraud_Label
+- ML Type: Boolean
+- Model Role: Target
+- Notes: 1 = Fraud, 0 = Legitimate
