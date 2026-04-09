@@ -13,7 +13,8 @@ Given the imbalanced nature of fraud detection, the following metrics for the mi
 *   **Confusion Matrix:** For a visual breakdown of true positives, true negatives, false positives, and false negatives.
 ## 5. Data Set
 **Dataset Name:** `FraudShield_Banking_Data.csv`
-**Description:** This dataset contains banking transaction records with various features such as transaction amount, time, date, customer information, merchant details, and a `Fraud_Label` indicating whether a transaction is legitimate or fraudulent.
+**Description:** This dataset contains banking transaction records with various features such as transaction amount, time, date, customer information, merchant details, and a `Fraud_Label` indicating whether a transaction is legitimate or fraudulent
+For the description of data, please refer here: https://github.com/andrewcalonzo/ACCalonzo_Capstone_Project/blob/main/Data%20Dictionary
 ## 6. Repository Structure
 ```
 fraud_detection_project/
