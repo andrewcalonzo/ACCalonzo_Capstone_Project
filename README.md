@@ -108,3 +108,6 @@ The project workflow follows standard machine learning development steps, with a
     *   Cost-sensitive learning to better align with business objectives.
     *   Threshold adjustment based on specific business tolerance for false positives vs. false negatives.
 ```
+## 8. Submission Materials
+*   **Technical Presentation**
+*   **Business Presentation**
