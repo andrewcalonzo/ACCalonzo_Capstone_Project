@@ -6,11 +6,13 @@ Financial institutions face significant losses due to fraudulent transactions. I
 This is a **Binary Classification** task, specifically aiming to classify transactions as either 'Normal' (0) or 'Fraud' (1).
 ## 4. Success Metrics
 Given the imbalanced nature of fraud detection, the following metrics for the minority class (Fraud) are critical for evaluating model performance:
+* **Technical Metrics**
 *   **Recall (Sensitivity):** To minimize missed fraudulent transactions.
 *   **Precision:** To reduce false alarms (legitimate transactions incorrectly flagged as fraud).
 *   **F1-Score:** The harmonic mean of Precision and Recall, providing a balanced measure.
 *   **ROC-AUC (Receiver Operating Characteristic - Area Under Curve):** To assess the model's ability to distinguish between fraud and normal transactions across various thresholds.
 *   **Confusion Matrix:** For a visual breakdown of true positives, true negatives, false positives, and false negatives.
+* **Business Metrics**
 ## 5. Data Set
 *   **Dataset Name:** `FraudShield_Banking_Data.csv`
 *   **Source:** https://www.kaggle.com/datasets/algozee/financial-transaction-fraud-dataset
