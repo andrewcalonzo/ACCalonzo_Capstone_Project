@@ -109,5 +109,6 @@ The project workflow follows standard machine learning development steps, with a
     *   Threshold adjustment based on specific business tolerance for false positives vs. false negatives.
 ```
 ## 8. Submission Materials
-*   **Technical Presentation**
-*   **Business Presentation**
+*   **Technical Presentation**: Refer to: https://github.com/andrewcalonzo/ACCalonzo_Capstone_Project/blob/main/Fraud_Detection_Technical_Presentation.pptx
+*   **Business Presentation**: Refer to: https://github.com/andrewcalonzo/ACCalonzo_Capstone_Project/blob/main/Fraud_Detection_Business_Presentation.pptx
+
